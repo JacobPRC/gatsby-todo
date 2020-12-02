@@ -1,6 +1,5 @@
 import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
-import AnchorLink from "react-anchor-link-smooth-scroll"
 import styled from "styled-components"
 
 const Li = styled.li`
