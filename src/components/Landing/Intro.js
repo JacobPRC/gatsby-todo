@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
+import NetlifyIdentity from "netlify-identity-widget"
 
 import * as S from "../styles"
 
@@ -20,13 +20,13 @@ const Container = styled.div`
 `
 
 export default () => {
+  useEffect(() => NetlifyIdentity.init({}), [])
+
   return (
     <Container>
       <S.H1>Conquer your chores with Todo Champion</S.H1>
       <br />
-      <S.Button as={Link} to="/new-user">
-        Get Started
-      </S.Button>
+      <S.Button onClick={() => NetlifyIdentity.open()}>Get Started</S.Button>
     </Container>
   )
 }

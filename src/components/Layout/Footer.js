@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import NetlifyIdentity from "netlify-identity-widget"
 
 import * as S from "../styles"
 
@@ -78,43 +79,48 @@ const MadeByDiv = styled.div`
   margin-left: 1rem;
 `
 
-export default () => (
-  <Footer>
-    <Container>
-      <UpperFooterContainer>
-        <SocialDiv>
-          <S.P>
-            Join millions of people who organize work and life with Todo
-            Champion.
-          </S.P>
-          <S.Button as={Link} to="/new-user">
-            Get Started
-          </S.Button>
-        </SocialDiv>
-        <AboutContainer>
-          <S.P>More Links</S.P>
-          <br />
-          <StyledLink as={Link} to="/testimonials">
-            Testimonials
-          </StyledLink>
-          <StyledLink as={Link} to="/careers">
-            Careers
-          </StyledLink>
-          <StyledLink as={Link} to="/help-center">
-            Help Center
-          </StyledLink>
-        </AboutContainer>
-      </UpperFooterContainer>
-      <FooterContainer>
-        <LinksContainer>
-          <StyledP>Security {"  "} </StyledP>
-          <StyledP>{"  "} | Privacy</StyledP>
-          <StyledP>{"  "} | Terms</StyledP>
-        </LinksContainer>
-        <MadeByDiv>
-          <StyledP> @ Jacob Cunningham</StyledP>
-        </MadeByDiv>
-      </FooterContainer>
-    </Container>
-  </Footer>
-)
+NetlifyIdentity.init({})
+
+export default () => {
+  useEffect(() => NetlifyIdentity.init({}), [])
+  return (
+    <Footer>
+      <Container>
+        <UpperFooterContainer>
+          <SocialDiv>
+            <S.P>
+              Join millions of people who organize work and life with Todo
+              Champion.
+            </S.P>
+            <S.Button onClick={() => NetlifyIdentity.open()}>
+              Get Started
+            </S.Button>
+          </SocialDiv>
+          <AboutContainer>
+            <S.P>More Links</S.P>
+            <br />
+            <StyledLink as={Link} to="/testimonials">
+              Testimonials
+            </StyledLink>
+            <StyledLink as={Link} to="/careers">
+              Careers
+            </StyledLink>
+            <StyledLink as={Link} to="/help-center">
+              Help Center
+            </StyledLink>
+          </AboutContainer>
+        </UpperFooterContainer>
+        <FooterContainer>
+          <LinksContainer>
+            <StyledP>Security {"  "} </StyledP>
+            <StyledP>{"  "} | Privacy</StyledP>
+            <StyledP>{"  "} | Terms</StyledP>
+          </LinksContainer>
+          <MadeByDiv>
+            <StyledP> @ Jacob Cunningham</StyledP>
+          </MadeByDiv>
+        </FooterContainer>
+      </Container>
+    </Footer>
+  )
+}

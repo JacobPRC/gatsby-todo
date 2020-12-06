@@ -1,11 +1,14 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { graphql, useStaticQuery, Link } from "gatsby"
+import NetlifyIdentity from "netlify-identity-widget"
 
 import Layout from "../components/Layout/Layout"
 import Testimonial from "../components/templates/Testimonial"
 import * as S from "../components/styles"
 
 export default () => {
+  useEffect(() => NetlifyIdentity.init({}), [])
+
   const data = useStaticQuery(
     graphql`
       query {
@@ -42,9 +45,7 @@ export default () => {
         <i>
           <h5>Convinced yet?</h5>
         </i>
-        <S.Button as={Link} to="/new-user">
-          Get Started
-        </S.Button>
+        <S.Button onClick={() => NetlifyIdentity.open()}>Get Started</S.Button>
       </S.FlexColumn>
     </Layout>
   )
