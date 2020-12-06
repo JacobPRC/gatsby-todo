@@ -20,7 +20,7 @@ const Container = styled.div`
 `
 
 export default () => {
-  useEffect(() => NetlifyIdentity.init({}), [])
+  useEffect(() => NetlifyIdentity.init({}))
 
   return (
     <Container>

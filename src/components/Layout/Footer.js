@@ -82,7 +82,7 @@ const MadeByDiv = styled.div`
 NetlifyIdentity.init({})
 
 export default () => {
-  useEffect(() => NetlifyIdentity.init({}), [])
+  useEffect(() => NetlifyIdentity.init({}))
   return (
     <Footer>
       <Container>
