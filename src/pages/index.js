@@ -22,9 +22,7 @@ const IndexPage = () => {
       <S.FlexColumn>
         <S.H2>Achieve peace of mind with Todo Champion</S.H2>
         <br />
-        <S.Button as={Link} to="/new-user">
-          Get Started
-        </S.Button>
+        <S.Button onClick={() => NetlifyIdentity.open()}>Get Started</S.Button>
       </S.FlexColumn>
     </Layout>
   )

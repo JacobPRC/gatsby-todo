@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import styled from "styled-components"
+import NetlifyIdentity from "netlify-identity-widget"
 
 const Li = styled.li`
   display: inline-block;
@@ -69,6 +70,8 @@ const ListLink = ({ href, children }) => (
 )
 
 export default () => {
+  const [user, setUser] = useState()
+
   const data = useStaticQuery(
     graphql`
       query {
@@ -82,6 +85,15 @@ export default () => {
   )
   const { title } = data.site.siteMetadata
 
+  NetlifyIdentity.on("login", user => {
+    NetlifyIdentity.close()
+    setUser(user)
+  })
+
+  NetlifyIdentity.on("logout", () => setUser())
+
+  console.log(user)
+  useEffect(() => console.log(user), [user])
   return (
     <Header>
       <Nav>
@@ -98,7 +110,9 @@ export default () => {
           </Link>
           <StyledUl>
             <ListLink href="/">Login</ListLink>
+            <ListLink href="/app">Dashboard</ListLink>
             <ListLink href="/">Signup</ListLink>
+            {user && <ListLink>{user.user_metadata.full_name}</ListLink>}
           </StyledUl>
         </NavContainer>
       </Nav>
