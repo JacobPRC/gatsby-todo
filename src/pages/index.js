@@ -12,9 +12,9 @@ import { IdentityContext } from "../../identity-context"
 
 const IndexPage = () => {
   // const { user, identity: netlifyIdentity } = useContext(IdentityContext)
-  useEffect(() => {
-    NetlifyIdentity.init()
-  })
+  // useEffect(() => {
+  //   NetlifyIdentity.init()
+  // })
 
   return (
     <Layout>
