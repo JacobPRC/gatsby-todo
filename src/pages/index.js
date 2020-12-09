@@ -16,7 +16,6 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Home" />
       <Intro />
-      <button onClick={() => NetlifyIdentity.open()}>Click me </button>
       <Reviews />
       <About />
       <br />

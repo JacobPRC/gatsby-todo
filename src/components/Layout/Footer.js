@@ -1,6 +1,7 @@
-import React, { useEffect } from "react"
+import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import NetlifyIdentity from "netlify-identity-widget"
 
 import * as S from "../styles"
 
@@ -88,7 +89,9 @@ export default () => {
               Join millions of people who organize work and life with Todo
               Champion.
             </S.P>
-            <S.Button>Get Started</S.Button>
+            <S.Button onClick={() => NetlifyIdentity.open()}>
+              Get Started
+            </S.Button>
           </SocialDiv>
           <AboutContainer>
             <S.P>More Links</S.P>
