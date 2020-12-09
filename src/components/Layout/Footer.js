@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import NetlifyIdentity from "netlify-identity-widget"
 
 import * as S from "../styles"
 
@@ -78,8 +77,6 @@ const StyledP = styled.p`
 const MadeByDiv = styled.div`
   margin-left: 1rem;
 `
-
-NetlifyIdentity.init({})
 
 export default () => {
   return (
