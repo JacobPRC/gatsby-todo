@@ -11,7 +11,9 @@ import About from "../components/Landing/About"
 import { IdentityContext } from "../../identity-context"
 
 const IndexPage = () => {
-  const { user, identity: netlifyIdentity } = useContext(IdentityContext)
+  // const { user, identity: netlifyIdentity } = useContext(IdentityContext)
+
+  NetlifyIdentity.init({})
 
   return (
     <Layout>
