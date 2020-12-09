@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { graphql, useStaticQuery, Link } from "gatsby"
-import NetlifyIdentity from "netlify-identity-widget"
+// import NetlifyIdentity from "netlify-identity-widget"
 
 import Layout from "../components/Layout/Layout"
 import Testimonial from "../components/templates/Testimonial"
@@ -43,7 +43,7 @@ export default () => {
         <i>
           <h5>Convinced yet?</h5>
         </i>
-        <S.Button onClick={() => NetlifyIdentity.open()}>Get Started</S.Button>
+        <S.Button>Get Started</S.Button>
       </S.FlexColumn>
     </Layout>
   )

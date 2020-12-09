@@ -82,7 +82,6 @@ const MadeByDiv = styled.div`
 NetlifyIdentity.init({})
 
 export default () => {
-  useEffect(() => NetlifyIdentity.init({}))
   return (
     <Footer>
       <Container>
@@ -92,9 +91,7 @@ export default () => {
               Join millions of people who organize work and life with Todo
               Champion.
             </S.P>
-            <S.Button onClick={() => NetlifyIdentity.open()}>
-              Get Started
-            </S.Button>
+            <S.Button>Get Started</S.Button>
           </SocialDiv>
           <AboutContainer>
             <S.P>More Links</S.P>
