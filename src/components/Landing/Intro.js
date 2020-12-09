@@ -20,8 +20,6 @@ const Container = styled.div`
 `
 
 export default () => {
-  useEffect(() => NetlifyIdentity.init({}))
-
   return (
     <Container>
       <S.H1>Conquer your chores with Todo Champion</S.H1>

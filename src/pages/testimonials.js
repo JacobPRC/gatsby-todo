@@ -7,8 +7,6 @@ import Testimonial from "../components/templates/Testimonial"
 import * as S from "../components/styles"
 
 export default () => {
-  useEffect(() => NetlifyIdentity.init({}))
-
   const data = useStaticQuery(
     graphql`
       query {
