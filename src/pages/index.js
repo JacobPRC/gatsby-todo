@@ -8,9 +8,11 @@ import Layout from "../components/Layout/Layout"
 import Intro from "../components/Landing/Intro"
 import Reviews from "../components/Landing/Reviews"
 import About from "../components/Landing/About"
+import { IdentityContext } from "../../identity-context"
 
 const IndexPage = () => {
-  useEffect(() => NetlifyIdentity.init({}))
+  const { user, identity: netlifyIdentity } = useContext(IdentityContext)
+
   return (
     <Layout>
       <SEO title="Home" />
