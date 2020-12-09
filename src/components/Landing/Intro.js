@@ -24,7 +24,7 @@ export default () => {
     <Container>
       <S.H1>Conquer your chores with Todo Champion</S.H1>
       <br />
-      <S.Button>Get Started</S.Button>
+      <S.Button onClick={() => NetlifyIdentity.open()}>Get Started</S.Button>
     </Container>
   )
 }

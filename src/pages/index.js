@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useContext } from "react"
 import { Link } from "gatsby"
 import NetlifyIdentity from "netlify-identity-widget"
 
