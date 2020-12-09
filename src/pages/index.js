@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { Link } from "gatsby"
+import NetlifyIdentity from "netlify-identity-widget"
 
 import * as S from "../components/styles"
 import SEO from "../components/seo"
@@ -9,10 +10,13 @@ import Reviews from "../components/Landing/Reviews"
 import About from "../components/Landing/About"
 
 const IndexPage = () => {
+  useEffect(() => NetlifyIdentity.init({}))
+
   return (
     <Layout>
       <SEO title="Home" />
       <Intro />
+      <button onClick={() => NetlifyIdentity.open()}>Click me </button>
       <Reviews />
       <About />
       <br />
