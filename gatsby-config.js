@@ -9,6 +9,7 @@ module.exports = {
       resolve: `gatsby-plugin-create-client-paths`,
       options: { prefixes: [`/app/*`] },
     },
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {
