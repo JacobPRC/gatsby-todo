@@ -6,11 +6,10 @@ import Layout from "../components/Layout/Layout"
 
 export default () => {
   const { user } = useContext(IdentityContext)
-  const { full_name } = user.user_metadata
 
   return (
     <Layout>
-      <h1>Hello {full_name}</h1>
+      <h1>Hello {user.user_metadata.full_name || "world"}</h1>
     </Layout>
   )
 }
