@@ -1,17 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Router, Link } from "@reach/router"
-import NetlifyIdentity from "netlify-identity-widget"
 
-const user = NetlifyIdentity.currentUser()
-
-let Home = () => <div>Home</div>
-let Dash = () => <div>Dash: {user && user.user_metadata.full_name}</div>
+import { IdentityContext } from "../../identity-context"
+import Layout from "../components/Layout/Layout"
 
 export default () => {
+  const { user } = useContext(IdentityContext)
+  const { full_name } = user.user_metadata
+
   return (
-    <Router>
-      <Home path="/" />
-      <Dash path="dashboard" />
-    </Router>
+    <Layout>
+      <h1>Hello {full_name}</h1>
+    </Layout>
   )
 }

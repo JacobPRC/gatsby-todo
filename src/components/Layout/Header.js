@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useContext } from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import styled from "styled-components"
 import NetlifyIdentity from "netlify-identity-widget"
+
+import { IdentityContext } from "../../../identity-context"
 
 const Li = styled.li`
   display: inline-block;
@@ -70,7 +72,7 @@ const ListLink = ({ href, children }) => (
 )
 
 export default () => {
-  const [user, setUser] = useState()
+  const { user } = useContext(IdentityContext)
 
   const data = useStaticQuery(
     graphql`
@@ -85,15 +87,19 @@ export default () => {
   )
   const { title } = data.site.siteMetadata
 
-  NetlifyIdentity.on("login", user => {
-    NetlifyIdentity.close()
-    setUser(user)
-  })
+  const loggedInCheck = () => {
+    if (NetlifyIdentity.currentUser()) {
+      const { full_name } = user.user_metadata
+      return (
+        <>
+          <Link to="/app">{full_name}</Link>
+          <ListLink>Logout</ListLink>
+        </>
+      )
+    }
+    return <ListLink href="/">Login</ListLink>
+  }
 
-  NetlifyIdentity.on("logout", () => setUser())
-
-  console.log(user)
-  useEffect(() => console.log(user), [user])
   return (
     <Header>
       <Nav>
@@ -108,12 +114,7 @@ export default () => {
           >
             <StyledH3>{title}</StyledH3>
           </Link>
-          <StyledUl>
-            <ListLink href="/">Login</ListLink>
-            <ListLink href="/app">Dashboard</ListLink>
-            <ListLink href="/">Signup</ListLink>
-            {user && <ListLink>{user.user_metadata.full_name}</ListLink>}
-          </StyledUl>
+          <StyledUl>{loggedInCheck()}</StyledUl>
         </NavContainer>
       </Nav>
     </Header>
