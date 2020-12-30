@@ -25,7 +25,6 @@
     "gatsby-source-filesystem": "^2.5.0",
     "gatsby-transformer-remark": "^2.11.1",
     "gatsby-transformer-sharp": "^2.6.0",
-    "graphql": "^15.4.0",
     "netlify-identity-widget": "^1.9.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -45,9 +44,6 @@
     "gatsby"
   ],
   "license": "0BSD",
-  "resolutions": {
-    "graphql": "^15.4.0"
-  },
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
