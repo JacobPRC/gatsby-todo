@@ -46,6 +46,9 @@
     "gatsby"
   ],
   "license": "0BSD",
+  "resolutions": {
+    "graphql": "^15.4.0"
+  },
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
