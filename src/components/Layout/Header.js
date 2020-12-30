@@ -92,7 +92,7 @@ export default () => {
       const { full_name } = user.user_metadata
       return (
         <>
-          <Link to="/app">{full_name}</Link>
+          <ListLink href="/app">{full_name}</ListLink>
           <ListLink>Logout</ListLink>
         </>
       )
