@@ -25,6 +25,7 @@
     "gatsby-source-filesystem": "^2.5.0",
     "gatsby-transformer-remark": "^2.11.1",
     "gatsby-transformer-sharp": "^2.6.0",
+    "graphql": "^14.7.0",
     "netlify-identity-widget": "^1.9.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -36,6 +37,9 @@
     "styled-components": "^5.2.1",
     "typography": "^0.16.19",
     "typography-theme-fairy-gates": "^0.16.19"
+  },
+  "resolutions": {
+    "graphql": "14.7.0"
   },
   "devDependencies": {
     "prettier": "2.1.2"
