@@ -1,12 +1,12 @@
-import React from "react"
-import {
+const React = require("react")
+const {
   ApolloProvider,
   ApolloClient,
   HttpLink,
   InMemoryCache,
-} from "@apollo/client"
+} = require("@apollo/client")
 
-import { Provider } from "./identity-context"
+const { Provider } = require("./identity-context")
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
