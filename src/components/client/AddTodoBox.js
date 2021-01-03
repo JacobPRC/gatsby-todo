@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import { gql, useMutation } from "@apollo/client"
 
 import * as S from "../styles"
 
@@ -14,8 +15,22 @@ const Box = styled.textarea`
   height: 4rem;
 `
 
+const ADD_TODO = gql`
+  mutation addTodo($text: String!) {
+    addTodo(text: $text) {
+      id
+    }
+  }
+`
+
 export default ({ cancel }) => {
   const [todo, setTodo] = useState([])
+  const [addTodo] = useMutation(ADD_TODO)
+
+  const submission = e => {
+    e.preventDefault()
+    addTodo({ variables: { text: todo.value } })
+  }
   return (
     <>
       <Box
@@ -23,15 +38,7 @@ export default ({ cancel }) => {
         placeholder="e.g Hire Jacob Cunningham at 6pm p1 #Errands"
         value={todo.value}
       ></Box>
-      <S.Button
-        onClick={() => {
-          console.log(todo)
-          setTodo([])
-          console.log(todo)
-        }}
-      >
-        Add Task
-      </S.Button>
+      <S.Button onClick={e => submission(e)}>Add Task</S.Button>
       <S.Button onClick={cancel}>Cancel</S.Button>
     </>
   )

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react"
 import styled from "styled-components"
+import { gql, useQuery, useMutation } from "@apollo/client"
 
 import { IdentityContext } from "../../identity-context"
 import Layout from "../components/Layout/Layout"
@@ -52,23 +53,48 @@ const Circle = styled.div`
   font-size: 1rem;
 `
 
+const GET_TODOS = gql`
+  query GetTodos {
+    todos {
+      id
+      text
+      done
+    }
+  }
+`
+
+const UPDATE_TODO_DONE = gql`
+  mutation UpdateTodoDone($id: ID!) {
+    updateTodoDone(id: $id) {
+      text
+      done
+    }
+  }
+`
+
 export default () => {
   const { user } = useContext(IdentityContext)
   const [clicked, setClicked] = useState(false)
+  const { loading, error, data } = useQuery(GET_TODOS)
+  const [updateTodo] = useMutation(UPDATE_TODO_DONE)
 
   if (!user) return <div>Loading...</div>
+  if (loading) return <div>Loading</div>
+  if (error) return <div>Error</div>
 
   const clickCheck = () => {
     if (clicked) return <TodoBox cancel={() => setClicked(!clicked)} />
 
     if (!clicked)
       return (
-        <PlusButton onClick={() => setClicked(!clicked)}>
-          <Circle className="plus-icon">
-            <span>+</span>
-          </Circle>{" "}
-          Add task
-        </PlusButton>
+        <>
+          <PlusButton onClick={() => setClicked(!clicked)}>
+            <Circle className="plus-icon">
+              <span>+</span>
+            </Circle>{" "}
+            Add task
+          </PlusButton>
+        </>
       )
   }
 
