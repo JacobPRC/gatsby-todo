@@ -1,5 +1,10 @@
 import React from "react"
-import { ApolloClient, ApolloProvider } from "@apollo/client"
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  HttpLink,
+} from "@apollo/client"
 import { renderToString } from "react-dom/server"
 import fetch from "isomorphic-fetch"
 
