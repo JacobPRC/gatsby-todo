@@ -5,22 +5,24 @@ const {
   HttpLink,
   InMemoryCache,
 } = require("@apollo/client")
+const fetch = require("isomorphic-fetch")
 
 const { Provider } = require("./identity-context")
 
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: "https://todochampion.netlify.app/.netlify/functions/graphql",
-  }),
-})
+export const replaceRouterComponent = ({ history }) => {
+  const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    link: new HttpLink({
+      uri: "https://todochampion.netlify.app/.netlify/functions/graphql",
+    }),
+    fetch,
+  })
 
-const wrapRootElement = ({ element }) => {
-  return (
+  const ConnectedRouterWrapper = ({ children }) => (
     <ApolloProvider client={client}>
-      <Provider>{element}</Provider>
+      <Provider>{children}</Provider>
     </ApolloProvider>
   )
-}
 
-exports.wrapRootElement = wrapRootElement
+  return ConnectedRouterWrapper
+}
