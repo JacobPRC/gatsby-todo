@@ -21,9 +21,9 @@ export const replaceRenderer = ({ bodyComponent, replaceBodyHTMLString }) => {
   })
 
   const ConnectedBody = () => (
-    <ApolloProvider client={client}>
-      <Provider>{bodyComponent}</Provider>
-    </ApolloProvider>
+    <Provider>
+      <ApolloProvider client={client}>{bodyComponent}</ApolloProvider>
+    </Provider>
   )
 
   replaceBodyHTMLString(renderToString(<ConnectedBody />))

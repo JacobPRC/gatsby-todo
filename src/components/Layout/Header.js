@@ -74,6 +74,8 @@ const ListLink = ({ href, children }) => (
 export default () => {
   const { user } = useContext(IdentityContext)
 
+  console.log(useContext(IdentityContext))
+
   const data = useStaticQuery(
     graphql`
       query {
@@ -89,10 +91,9 @@ export default () => {
 
   const loggedInCheck = () => {
     if (NetlifyIdentity.currentUser()) {
-      const { full_name } = user.user_metadata
       return (
         <>
-          <ListLink href="/app">{full_name}</ListLink>
+          <ListLink href="/app">{user.user_metadata.full_name}</ListLink>
           <ListLink>Logout</ListLink>
         </>
       )
