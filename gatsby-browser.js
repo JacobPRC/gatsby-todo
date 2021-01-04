@@ -9,7 +9,7 @@ const fetch = require("isomorphic-fetch")
 
 const { Provider } = require("./identity-context")
 
-export const replaceRouterComponent = ({ history }) => {
+export const replaceRouterComponent = () => {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
     link: new HttpLink({
