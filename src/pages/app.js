@@ -75,15 +75,20 @@ const UPDATE_TODO_DONE = gql`
 export default () => {
   const { user } = useContext(IdentityContext)
   const [clicked, setClicked] = useState(false)
-  const { loading, error, data } = useQuery(GET_TODOS)
+  const { loading, error, data, refetch } = useQuery(GET_TODOS)
   const [updateTodo] = useMutation(UPDATE_TODO_DONE)
 
   if (!user) return <div>Loading...</div>
   if (loading) return <div>Loading</div>
-  if (error) return <div>Error</div>
+  if (error) return <div>{error.message}</div>
+
+  console.log(data)
+
+  const renderTodos = () => data.todos.map(todo => <li>{todo.text}</li>)
 
   const clickCheck = () => {
-    if (clicked) return <TodoBox cancel={() => setClicked(!clicked)} />
+    if (clicked)
+      return <TodoBox refetch={refetch} cancel={() => setClicked(!clicked)} />
 
     if (!clicked)
       return (
@@ -94,6 +99,7 @@ export default () => {
             </Circle>{" "}
             Add task
           </PlusButton>
+          <ul>{renderTodos()}</ul>
         </>
       )
   }

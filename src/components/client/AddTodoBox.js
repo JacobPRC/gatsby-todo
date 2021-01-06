@@ -23,20 +23,21 @@ const ADD_TODO = gql`
   }
 `
 
-export default ({ cancel }) => {
-  const [todo, setTodo] = useState([])
+export default ({ cancel, refetch }) => {
+  const [todo, setTodo] = useState()
+  const [todos, setTodos] = useState([])
   const [addTodo] = useMutation(ADD_TODO)
 
   const submission = e => {
     e.preventDefault()
-    addTodo({ variables: { text: todo.value } })
+    addTodo({ variables: { text: todo } })
   }
   return (
     <>
       <Box
-        onChange={e => setTodo([{ done: false, value: e.target.value }])}
+        onChange={e => setTodo(e.target.value)}
         placeholder="e.g Hire Jacob Cunningham at 6pm p1 #Errands"
-        value={todo.value}
+        value={todo}
       ></Box>
       <S.Button onClick={e => submission(e)}>Add Task</S.Button>
       <S.Button onClick={cancel}>Cancel</S.Button>

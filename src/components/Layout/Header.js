@@ -74,8 +74,6 @@ const ListLink = ({ href, children }) => (
 export default () => {
   const { user } = useContext(IdentityContext)
 
-  console.log(useContext(IdentityContext))
-
   const data = useStaticQuery(
     graphql`
       query {
