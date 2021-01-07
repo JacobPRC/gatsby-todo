@@ -29,7 +29,7 @@ const resolvers = {
         return []
       }
       const results = await client.query(
-        q.Paginate(q.Match(q.Index("todos_by_user"), "user-test"))
+        q.Paginate(q.Match(q.Index("todos_by_user"), user))
       )
       return results.data.map(({ ref, text, done }) => ({
         id: ref.id,
@@ -40,39 +40,31 @@ const resolvers = {
   },
   Mutation: {
     addTodo: async (_, { text }, { user }) => {
-      if (!user) {
-        throw new Error("Must be authenticated to add todos")
-      } else {
-        const results = await client.query(
-          q.Create(q.Collection("todos"), {
-            data: {
-              text,
-              done: false,
-              owner: user,
-            },
-          })
-        )
-        return {
-          ...results.data,
-          id: results.ref.id,
-        }
+      const results = await client.query(
+        q.Create(q.Collection("todos"), {
+          data: {
+            text,
+            done: false,
+            owner: user,
+          },
+        })
+      )
+      return {
+        ...results.data,
+        id: results.ref.id,
       }
     },
     updateTodoDone: async (_, { id }, { user }) => {
-      if (!user) {
-        throw new Error("Must be authenticated to add todos")
-      } else {
-        const results = await client.query(
-          q.Update(q.Ref(q.Collection("todos"), id), {
-            data: {
-              done: true,
-            },
-          })
-        )
-        return {
-          ...results.data,
-          id: results.ref.id,
-        }
+      const results = await client.query(
+        q.Update(q.Ref(q.Collection("todos"), id), {
+          data: {
+            done: true,
+          },
+        })
+      )
+      return {
+        ...results.data,
+        id: results.ref.id,
       }
     },
   },
