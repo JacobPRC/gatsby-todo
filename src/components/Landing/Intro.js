@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import NetlifyIdentity from "netlify-identity-widget"
 
+import GetStartedButton from "../templates/getStartedButton"
 import * as S from "../styles"
 
 const StyledH1 = styled.h1`
@@ -19,12 +19,10 @@ const Container = styled.div`
   align-items: center;
 `
 
-export default () => {
-  return (
-    <Container>
-      <S.H1>Conquer your chores with Todo Champion</S.H1>
-      <br />
-      <S.Button onClick={() => NetlifyIdentity.open()}>Get Started</S.Button>
-    </Container>
-  )
-}
+export default () => (
+  <Container>
+    <S.H1>Conquer your chores with Todo Champion</S.H1>
+    <br />
+    <GetStartedButton />
+  </Container>
+)

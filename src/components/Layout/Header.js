@@ -11,6 +11,18 @@ const Li = styled.li`
   text-shadow: none;
 `
 
+const HeaderLink = styled.li`
+  display: inline-block;
+  margin-right: 1rem;
+  text-shadow: none;
+  color: "black";
+  textshadow: none;
+  textdecoration: none;
+  backgroundimage: none;
+  color: #575757;
+  cursor: pointer;
+`
+
 const Header = styled.header`
   padding: 1rem;
   background-color: #fff;
@@ -54,7 +66,7 @@ const StyledUl = styled.ul`
   list-style: none;
 `
 
-const ListLink = ({ href, children }) => (
+const ListLink = ({ href, state, children }) => (
   <Li>
     <Link
       style={{
@@ -63,6 +75,7 @@ const ListLink = ({ href, children }) => (
         textDecoration: "none",
         backgroundImage: "none",
         color: "#575757",
+        cursor: "pointer",
       }}
       to={href}
     >
@@ -88,15 +101,19 @@ export default () => {
   const { title } = data.site.siteMetadata
 
   const loggedInCheck = () => {
-    if (NetlifyIdentity.currentUser()) {
+    if (user) {
       return (
         <>
           <ListLink href="/app">{user.user_metadata.full_name}</ListLink>
-          <ListLink>Logout</ListLink>
+          <HeaderLink onClick={() => NetlifyIdentity.open()}>Logout</HeaderLink>
         </>
       )
     }
-    return <ListLink href="/">Login</ListLink>
+    return (
+      <HeaderLink onClick={() => NetlifyIdentity.open()} href="/">
+        Login
+      </HeaderLink>
+    )
   }
 
   return (

@@ -1,6 +1,4 @@
-import React, { useEffect } from "react"
-import { Link } from "gatsby"
-import NetlifyIdentity from "netlify-identity-widget"
+import React from "react"
 
 import * as S from "../components/styles"
 import SEO from "../components/seo"
@@ -8,10 +6,9 @@ import Layout from "../components/Layout/Layout"
 import Intro from "../components/Landing/Intro"
 import Reviews from "../components/Landing/Reviews"
 import About from "../components/Landing/About"
+import GetStartedButton from "../components/templates/getStartedButton"
 
 const IndexPage = () => {
-  useEffect(() => NetlifyIdentity.init({}))
-
   return (
     <Layout>
       <SEO title="Home" />
@@ -22,7 +19,7 @@ const IndexPage = () => {
       <S.FlexColumn>
         <S.H2>Achieve peace of mind with Todo Champion</S.H2>
         <br />
-        <S.Button onClick={() => NetlifyIdentity.open()}>Get Started</S.Button>
+        <GetStartedButton />
       </S.FlexColumn>
     </Layout>
   )

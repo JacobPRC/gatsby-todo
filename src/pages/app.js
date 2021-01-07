@@ -5,7 +5,6 @@ import { gql, useQuery, useMutation } from "@apollo/client"
 import { IdentityContext } from "../../identity-context"
 import Layout from "../components/Layout/Layout"
 import TodoBox from "../components/client/AddTodoBox"
-import * as S from "../components/styles"
 
 const Conatiner = styled.div`
   padding-left: 55px;
@@ -54,8 +53,8 @@ const Circle = styled.div`
 `
 
 const GET_TODOS = gql`
-  query GetTodos {
-    todos {
+  query GetTodos($user: ID!) {
+    todos(user: $user) {
       id
       text
       done
@@ -72,23 +71,29 @@ const UPDATE_TODO_DONE = gql`
   }
 `
 
-export default () => {
+export default props => {
   const { user } = useContext(IdentityContext)
   const [clicked, setClicked] = useState(false)
-  const { loading, error, data, refetch } = useQuery(GET_TODOS)
-  const [updateTodo] = useMutation(UPDATE_TODO_DONE)
+  const { loading, error, refetch, data } = useQuery(GET_TODOS, {
+    variables: {
+      user: props.location.state.user,
+    },
+  })
+  if (loading) console.log("loading")
+  if (error) console.log(error.message)
+  if (!loading && !error) return console.log(data)
+  // if (loading) return <div>Loading</div>
+  // if (error) return <div>{error}</div>
 
-  if (!user) return <div>Loading...</div>
-  if (loading) return <div>Loading</div>
-  if (error) return <div>{error.message}</div>
+  // const renderTodos = () => {
+  //   return console.log(data)
+  //   // return data.todos.map(todo => <li>{todo.text}</li>)
+  // }
 
-  console.log(data)
-
-  const renderTodos = () => data.todos.map(todo => <li>{todo.text}</li>)
+  // renderTodos()
 
   const clickCheck = () => {
-    if (clicked)
-      return <TodoBox refetch={refetch} cancel={() => setClicked(!clicked)} />
+    if (clicked) return <TodoBox cancel={() => setClicked(!clicked)} />
 
     if (!clicked)
       return (
@@ -99,7 +104,7 @@ export default () => {
             </Circle>{" "}
             Add task
           </PlusButton>
-          <ul>{renderTodos()}</ul>
+          {/* <ul>{renderTodos()}</ul> */}
         </>
       )
   }

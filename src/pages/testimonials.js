@@ -5,6 +5,7 @@ import NetlifyIdentity from "netlify-identity-widget"
 import Layout from "../components/Layout/Layout"
 import Testimonial from "../components/templates/Testimonial"
 import * as S from "../components/styles"
+import GetStartedButton from "../components/templates/getStartedButton"
 
 export default () => {
   const data = useStaticQuery(
@@ -43,7 +44,7 @@ export default () => {
         <i>
           <h5>Convinced yet?</h5>
         </i>
-        <S.Button onClick={() => NetlifyIdentity.open()}>Get Started</S.Button>
+        <GetStartedButton />
       </S.FlexColumn>
     </Layout>
   )
