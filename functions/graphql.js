@@ -12,9 +12,9 @@ const typeDefs = gql`
     todos(user: ID!): [Todo]!
   }
   type Todo {
-    id: ID!
-    text: String!
-    done: Boolean!
+    id: ID
+    text: String
+    done: Boolean
   }
   type Mutation {
     addTodo(text: String!, user: ID!): Todo

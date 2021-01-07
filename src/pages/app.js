@@ -82,7 +82,7 @@ export default props => {
   // if (loading) console.log("loading")
   // if (error) console.log(error.message)
   // if (!loading && !error) return console.log(data)
-  // if (loading) return <div>Loading</div>
+  // // if (loading) return <div>Loading</div>
   // if (error) return <div>{error}</div>
 
   // const renderTodos = () => {
