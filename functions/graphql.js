@@ -9,7 +9,7 @@ const client = new faunadb.Client({ secret: keys.FAUNA || process.env.FAUNA })
 
 const typeDefs = gql`
   type Query {
-    todos: [Todo]!
+    todos(user: ID!): [Todo]!
   }
   type Todo {
     id: ID!
@@ -24,7 +24,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    todos: async (parent, args, { user }) => {
+    todos: async (parent, { user }) => {
       if (!user) {
         return []
       }
