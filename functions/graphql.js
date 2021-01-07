@@ -39,7 +39,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    addTodo: async (_, { text }, { user }) => {
+    addTodo: async (_, { text, user }) => {
       const results = await client.query(
         q.Create(q.Collection("todos"), {
           data: {
