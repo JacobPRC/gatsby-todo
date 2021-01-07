@@ -32,7 +32,7 @@ const resolvers = {
         q.Paginate(q.Match(q.Index("todos_by_user"), user))
       )
       //need to find out what is being returned from results. This may be the err
-      return console.log(results)
+      return console.log(results, results.text, results.done)
       return results.data.map(({ text, done }) => ({
         text,
         done,
