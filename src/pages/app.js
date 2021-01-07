@@ -111,7 +111,7 @@ export default props => {
 
   return (
     <Layout>
-      <h1>Hello {user.user_metadata.full_name}</h1>
+      {/* <h1>Hello {user.user_metadata.full_name}</h1> */}
       <Conatiner>{clickCheck()}</Conatiner>
     </Layout>
   )
