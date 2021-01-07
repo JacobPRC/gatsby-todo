@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { gql, useMutation } from "@apollo/client"
+import netlifyIdentity from "netlify-identity-widget"
 
 import * as S from "../styles"
 
@@ -16,8 +17,8 @@ const Box = styled.textarea`
 `
 
 const ADD_TODO = gql`
-  mutation addTodo($text: String!) {
-    addTodo(text: $text) {
+  mutation addTodo($text: String!, $user: ID!) {
+    addTodo(text: $text, user: $user) {
       id
     }
   }
@@ -28,9 +29,11 @@ export default ({ cancel, refetch }) => {
   const [todos, setTodos] = useState([])
   const [addTodo] = useMutation(ADD_TODO)
 
+  const user = netlifyIdentity.currentUser()
+
   const submission = e => {
     e.preventDefault()
-    addTodo({ variables: { text: todo } })
+    addTodo({ variables: { text: todo, user: user.id } })
   }
   return (
     <>
