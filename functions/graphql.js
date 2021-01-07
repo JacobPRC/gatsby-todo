@@ -31,6 +31,8 @@ const resolvers = {
       const results = await client.query(
         q.Paginate(q.Match(q.Index("todos_by_user"), user))
       )
+      //need to find out what is being returned from results. This may be the err
+      return console.log(results)
       return results.data.map(({ text, done }) => ({
         text,
         done,
