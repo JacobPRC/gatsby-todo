@@ -35,7 +35,7 @@ const resolvers = {
       //have to try 2 redeploy this see what comes out from it. netlify is down
       return results.data.map(item => {
         const obj = { text: item[1], done: item[2] }
-        return console.log(obj)
+        return obj
       })
     },
   },
