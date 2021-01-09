@@ -51,10 +51,11 @@ const resolvers = {
           },
         })
       )
-      return {
+      const balls = {
         ...results.data,
         id: results.ref.id,
       }
+      return console.log(balls)
     },
     updateTodoDone: async (_, { id }, { user }) => {
       const results = await client.query(
