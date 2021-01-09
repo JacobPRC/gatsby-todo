@@ -32,7 +32,8 @@ const resolvers = {
         q.Paginate(q.Match(q.Index("todos_by_user"), user))
       )
       //need to find out what is being returned from results. This may be the err
-      return results.map(item => console.log(item))
+      //have to try 2 redeploy this see what comes out from it. netlify is down
+      return console.log(results)
       return results.data.map(({ text, done }) => ({
         text,
         done,
