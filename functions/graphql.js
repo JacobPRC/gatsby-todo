@@ -28,11 +28,13 @@ const resolvers = {
       if (!user) {
         return []
       }
-      const results = await client.query(
-        q.Paginate(q.Match(q.Index("todos_by_user"), user))
-      )
+      const results = await client.query(q.Filter(user))
+      // const results = await client.query(
+      //   q.Paginate(q.Match(q.Index("todos_by_user"), user))
+      // )
       //need to find out what is being returned from results. This may be the err
       //have to try 2 redeploy this see what comes out from it. netlify is down
+      return console.log(results)
       return results.data.map(item => {
         return console.log(results)
         const obj = { text: item[1], done: item[2] }
