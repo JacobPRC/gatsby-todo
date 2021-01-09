@@ -34,8 +34,8 @@ const resolvers = {
       //need to find out what is being returned from results. This may be the err
       //have to try 2 redeploy this see what comes out from it. netlify is down
       return results.data.map(item => {
-        return console.log(item[1])
-        return { text: item[1], done: item[2] }
+        const obj = { text: item[1], done: item[2] }
+        return console.log(obj)
       })
     },
   },
