@@ -1,8 +1,9 @@
 const { ApolloServer, gql } = require("apollo-server-lambda")
 const faunadb = require("faunadb")
+const keys = require("../keys")
 const q = faunadb.query
 
-var client = new faunadb.Client({ secret: process.env.FAUNA })
+const client = new faunadb.Client({ secret: keys.FAUNA || process.env.FAUNA })
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
