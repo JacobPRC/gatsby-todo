@@ -29,10 +29,7 @@ const resolvers = {
         return []
       }
       const results = await client.query(
-        q.Map(
-          q.Paginate(q.Documents(q.Collection("todos"))),
-          q.Lambda(x => q.Get(x))
-        )
+        q.Query(q.Ref(q.Collection("todos"), "287268815880847875"))
       )
       return console.log(results)
 
