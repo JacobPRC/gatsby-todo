@@ -28,12 +28,13 @@ const resolvers = {
       if (!user) {
         return []
       }
-      return q
-        .Map(
+      const results = await client.query(
+        q.Map(
           q.Paginate(q.Documents(q.Collection("todos"))),
           q.Lambda(x => q.Get(x))
         )
-        .then(x => console.log(x))
+      )
+      return console.log(results)
 
       const results = await client.query(
         q.Get(q.Match(q.Index("todos_by_user"), user))
