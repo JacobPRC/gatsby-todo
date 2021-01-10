@@ -28,8 +28,9 @@ const resolvers = {
       if (!user) {
         return []
       }
-      const results = await client.query(q.Get(q.Ref(q.Collection("todos"))))
-      return console.log(results)
+      const results = await q.Get(q.Match(q.Index("todos_by_user"), user))
+      console.log(results)
+      return results
       // const results = await client.query(
       //   q.Paginate(q.Match(q.Index("todos_by_user"), user))
       // )
