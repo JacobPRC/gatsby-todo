@@ -28,7 +28,9 @@ const resolvers = {
       if (!user) {
         return []
       }
-      const results = await q.Get(q.Match(q.Index("todos_by_user"), user))
+      const results = await client.query(
+        q.Get(q.Match(q.Index("todos_by_user"), user))
+      )
       console.log(results)
       return results
       // const results = await client.query(
