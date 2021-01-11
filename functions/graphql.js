@@ -31,8 +31,7 @@ const resolvers = {
       const results = await client.query(
         q.Paginate(q.Documents(q.Collection("todos")))
       )
-      console.log(results)
-      return results
+      return results.data.map(item => console.log(item))
 
       // const results = await client.query(
       //   q.Get(q.Match(q.Index("todos_by_user"), user))
