@@ -29,9 +29,10 @@ const resolvers = {
         return []
       }
       const results = await client.query(
-        q.Query(q.Ref(q.Collection("todos"), "287268815880847875"))
+        q.Paginate(q.Match(q.Index("todos_by_user")))
       )
-      return console.log(results)
+      console.log(results)
+      return results
 
       const results = await client.query(
         q.Get(q.Match(q.Index("todos_by_user"), user))
