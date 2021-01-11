@@ -24,14 +24,18 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    todos: async (parent, { user }) => {
+    todos: (parent, { user }) => {
       if (!user) {
         return []
       }
-      const results = await client.query(
-        q.Paginate(q.Documents(q.Collection("todos")))
-      )
-      return results.data.map(item => console.log(item))
+      return client
+        .query(
+          q.Map(
+            q.Paginate(q.Match(q.Index("all_Pilots"))),
+            q.Lambda("pilotRef", q.Get(q.Var("pilotRef")))
+          )
+        )
+        .then(ret => console.log(ret))
 
       // const results = await client.query(
       //   q.Get(q.Match(q.Index("todos_by_user"), user))
