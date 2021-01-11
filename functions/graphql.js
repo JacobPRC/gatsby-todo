@@ -31,8 +31,8 @@ const resolvers = {
       return client
         .query(
           q.Map(
-            q.Paginate(q.Match(q.Index("all_Pilots"))),
-            q.Lambda("pilotRef", q.Get(q.Var("pilotRef")))
+            q.Paginate(q.Match(q.Index("todos_by_index"))),
+            q.Lambda("todoRef", q.Get(q.Var("todoRef")))
           )
         )
         .then(ret => console.log(ret))
