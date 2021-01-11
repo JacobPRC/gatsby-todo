@@ -9,7 +9,7 @@ const client = new faunadb.Client({ secret: keys.FAUNA || process.env.FAUNA })
 
 const typeDefs = gql`
   type Query {
-    todos(user: ID!): [Todo]!
+    todos(user: ID!): Todo!
   }
   type Todo {
     id: ID
