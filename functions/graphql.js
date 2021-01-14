@@ -35,7 +35,7 @@ const resolvers = {
         )
       )
 
-      console.log(result)
+      return result.data
       // const results = await client.query(
       //   q.Get(q.Match(q.Index("todos_by_user"), user))
       // )
