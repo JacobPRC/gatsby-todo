@@ -24,11 +24,11 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    todos: (parent, { user }) => {
+    todos: async (parent, { user }) => {
       if (!user) {
         return []
       }
-      const result = client.query(
+      const result = await client.query(
         q.Map(
           q.Paginate(q.Match(q.Index("todos_by_user"), user)),
           q.Lambda("userRef", q.Get(q.Select([0], q.Var("userRef"))))
