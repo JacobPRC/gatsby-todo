@@ -31,7 +31,7 @@ const resolvers = {
       return client.query(
         q.Map(
           q.Paginate(q.Match(q.Index("todos_by_user"), user)),
-          Lambda("userRef", Get(Select([0], Var("userRef"))))
+          q.Lambda("userRef", q.Get(q.Select([0], q.Var("userRef"))))
         )
       )
       // const results = await client.query(
