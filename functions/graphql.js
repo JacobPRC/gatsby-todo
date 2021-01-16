@@ -7,21 +7,6 @@ const q = faunadb.query
 
 const client = new faunadb.Client({ secret: keys.FAUNA || process.env.FAUNA })
 
-const typeDefs = gql`
-  type Query {
-    todos(user: ID!): Todo!
-  }
-  type Todo {
-    id: ID
-    text: String
-    done: Boolean
-  }
-  type Mutation {
-    addTodo(text: String!, user: ID!): Todo
-    updateTodoDone(id: ID!): Todo
-  }
-`
-
 const resolvers = {
   Query: {
     todos: async (parent, { user }) => {
@@ -56,7 +41,7 @@ const resolvers = {
   Mutation: {
     addTodo: async (_, { text, user }) => {
       const results = await client.query(
-        q.Create(q.Collection("todos"), {
+        q.Create(q.Collection("Todo"), {
           data: {
             text,
             done: false,
