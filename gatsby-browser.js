@@ -2,15 +2,13 @@ const React = require("react")
 const {
   ApolloProvider,
   ApolloClient,
+  HttpLink,
   InMemoryCache,
 } = require("@apollo/client")
 const { setContext } = require("apollo-link-context")
-const { createHttpLink } = require("apollo-link-http")
-const fetch = require("isomorphic-fetch")
 const netlifyIdentity = require("netlify-identity-widget")
 
 const { Provider } = require("./identity-context")
-const keys = require("./keys")
 
 const authlink = setContext((_, { headers }) => {
   const user = netlifyIdentity.currentUser()
@@ -23,11 +21,10 @@ const authlink = setContext((_, { headers }) => {
   }
 })
 
-const httpLink = createHttpLink({
-  uri: "https://graphql.fauna.com/graphql",
-  fetch,
+const httpLink = new HttpLink({
+  uri: "https://todochampion.netlify.app/.netlify/functions/graphql",
   headers: {
-    Authorization: `Bearer ${keys.SERVER_KEY || process.env.SERVER_KEY}`,
+    "Access-Control-Allow-Origin": "http://localhost:8000/",
   },
 })
 
@@ -36,10 +33,12 @@ const client = new ApolloClient({
   link: authlink.concat(httpLink),
 })
 
-export const wrapRootElement = ({ element }) => {
+const wrapRootElement = ({ element }) => {
   return (
     <Provider>
       <ApolloProvider client={client}>{element}</ApolloProvider>
     </Provider>
   )
 }
+
+exports.wrapRootElement = wrapRootElement
