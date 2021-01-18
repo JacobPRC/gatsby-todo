@@ -1,37 +1,25 @@
-require("dotenv").config()
-const { createHttpLink } = require("apollo-link-http")
-const {
-  ApolloServer,
-  makeRemoteExecutableSchema,
-  introspectSchema,
-} = require("apollo-server-micro")
-const fetch = require("isomorphic-fetch")
+const faunadb = require("faunadb")
 const keys = require("../keys")
 
-const link = createHttpLink({
-  uri: "https://graphql.fauna.com/graphql",
-  fetch,
-  headers: {
-    Authorization: `Bearer ${keys.SERVER_KEY || process.env.SERVER_KEY}`,
-  },
+const q = faunadb.query
+
+var adminClient = new faunadb.Client({ secret: "YOUR_FAUNADB_ADMIN_SECRET" })
+
+var serverClient = new faunadb.Client({
+  secret: "fnAD_OK4pgACAqJoOmN-qALb0uKM7EPT992x7mzI",
 })
 
-const schema = makeRemoteExecutableSchema({
-  schema: introspectSchema(link),
-  link,
-})
-
-const server = new ApolloServer({
-  schema,
-  introspection: true,
-})
-
-exports.handler = server.createHandler({
-  cors: {
-    origin: "*",
-    credentials: true,
-  },
-})
+const run = () => {
+  return serverClient
+    .query(
+      q.Map(
+        q.Paginate(q.Match(q.Index("all_Planets_by_type"), "GAS")),
+        q.Lambda("planetRef", q.Get(q.Var("planetRef")))
+      )
+    )
+    .then(ret => console.log(ret.data))
+}
+run()
 
 // const { ApolloServer, gql } = require("apollo-server-lambda")
 // const faunadb = require("faunadb")
@@ -40,7 +28,20 @@ exports.handler = server.createHandler({
 
 // const q = faunadb.query
 
-// const client = new faunadb.Client({ secret: keys.FAUNA || process.env.FAUNA })
+// const typeDefs = gql`
+//   type Query {
+//     todos(user: ID!): [Todo]!
+//   }
+//   type Todo {
+//     id: ID
+//     text: String
+//     done: Boolean
+//   }
+//   type Mutation {
+//     addTodo(text: String!, user: ID!): Todo
+//     updateTodoDone(id: ID!): Todo
+//   }
+// `
 
 // const resolvers = {
 //   Query: {
@@ -48,19 +49,16 @@ exports.handler = server.createHandler({
 //       if (!user) {
 //         return []
 //       }
-//       const result = await client.query(
-//         q.Map(
-//           q.Paginate(q.Match(q.Index("todos_by_user"), user)),
-//           q.Lambda("userRef", q.Get(q.Select([0], q.Var("userRef"))))
-//         )
+//       const results = await client.query(
+//         q.Query(q.Ref(q.Collection("todos"), "287268815880847875"))
 //       )
+//       return console.log(results)
 
-//       return result
-//       // const results = await client.query(
-//       //   q.Get(q.Match(q.Index("todos_by_user"), user))
-//       // )
-//       // console.log(results)
-//       // return results
+//       const results = await client.query(
+//         q.Get(q.Match(q.Index("todos_by_user"), user))
+//       )
+//       console.log(results)
+//       return results
 //       // const results = await client.query(
 //       //   q.Paginate(q.Match(q.Index("todos_by_user"), user))
 //       // )
@@ -76,7 +74,7 @@ exports.handler = server.createHandler({
 //   Mutation: {
 //     addTodo: async (_, { text, user }) => {
 //       const results = await client.query(
-//         q.Create(q.Collection("Todo"), {
+//         q.Create(q.Collection("todos"), {
 //           data: {
 //             text,
 //             done: false,
@@ -122,7 +120,7 @@ exports.handler = server.createHandler({
 
 // exports.handler = server.createHandler({
 //   cors: {
-//     origin: true,
+//     origin: "*",
 //     credentials: true,
 //   },
 // })

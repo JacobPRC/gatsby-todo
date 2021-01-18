@@ -79,18 +79,14 @@ export default props => {
   //     user: props.location.state.user,
   //   },
   // })
-  // if (loading) console.log("loading")
-  // if (error) console.log(error.message)
-  // if (!loading && !error) return console.log(data)
-  // // if (loading) return <div>Loading</div>
-  // if (error) return <div>{error}</div>
+  // if (loading) return <div>Loading</div>
+  // if (error) return <div>{error.message}</div>
+  // console.log(props.location.state.user)
+  // console.log(data)
 
   // const renderTodos = () => {
-  //   return console.log(data)
-  //   // return data.todos.map(todo => <li>{todo.text}</li>)
+  //   return data.todos.map(todo => <li>{todo.text}</li>)
   // }
-
-  // renderTodos()
 
   const clickCheck = () => {
     if (clicked) return <TodoBox cancel={() => setClicked(!clicked)} />
