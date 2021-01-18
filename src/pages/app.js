@@ -83,7 +83,10 @@ export default props => {
   if (loading) return <div>Loading</div>
   if (error) return <div>{error.message}</div>
 
-  console.log(data)
+  const renderTodos = () =>
+    data.allTodos.data.map(item => {
+      return <li key={item._id}>{item.text}</li>
+    })
 
   // const { loading, error, refetch, data } = useQuery(GET_TODOS, {
   //   variables: {
@@ -111,7 +114,7 @@ export default props => {
             </Circle>{" "}
             Add task
           </PlusButton>
-          {/* <ul>{renderTodos()}</ul> */}
+          <ul>{renderTodos()}</ul>
         </>
       )
   }
