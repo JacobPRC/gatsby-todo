@@ -5,6 +5,7 @@ const {
   InMemoryCache,
 } = require("@apollo/client")
 const { setContext } = require("apollo-link-context")
+const { createHttpLink } = require("apollo-link-http")
 const netlifyIdentity = require("netlify-identity-widget")
 
 const { Provider } = require("./identity-context")
