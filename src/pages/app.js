@@ -53,11 +53,15 @@ const Circle = styled.div`
 `
 
 const GET_TODOS = gql`
-  query GetTodos($user: ID!) {
-    todos(user: $user) {
-      id
-      text
-      done
+  {
+    allTodos(_size: 5) {
+      data {
+        text
+        done
+        _id
+        _ts
+        owner
+      }
     }
   }
 `
@@ -74,6 +78,13 @@ const UPDATE_TODO_DONE = gql`
 export default props => {
   const { user } = useContext(IdentityContext)
   const [clicked, setClicked] = useState(false)
+  const { loading, error, data } = useQuery(GET_TODOS)
+
+  if (loading) return <div>Loading</div>
+  if (error) return <div>{error.message}</div>
+
+  console.log(data)
+
   // const { loading, error, refetch, data } = useQuery(GET_TODOS, {
   //   variables: {
   //     user: props.location.state.user,

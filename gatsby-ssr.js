@@ -10,6 +10,7 @@ const fetch = require("isomorphic-fetch")
 const netlifyIdentity = require("netlify-identity-widget")
 
 const { Provider } = require("./identity-context")
+const keys = require("./keys")
 
 const authlink = setContext((_, { headers }) => {
   const user = netlifyIdentity.currentUser()
@@ -25,6 +26,10 @@ const authlink = setContext((_, { headers }) => {
 const httpLink = createHttpLink({
   uri: "https://graphql.fauna.com/graphql",
   fetch,
+  headers: {
+    ...headers,
+    Authorization: `Bearer ${kays.SERVER_KEY || process.env.SERVER_KEY}`,
+  },
 })
 
 const client = new ApolloClient({
