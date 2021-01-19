@@ -77,7 +77,7 @@ export default props => {
   const { user } = useContext(IdentityContext)
   const [clicked, setClicked] = useState(false)
   const { loading, error, data, refetch } = useQuery(GET_TODOS, {
-    variables: { owner: props.location.state.user || user.id },
+    variables: { owner: user.id || props.location.state.user },
   })
 
   if (loading) return <div>Loading</div>
