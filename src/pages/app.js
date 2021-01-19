@@ -53,13 +53,11 @@ const Circle = styled.div`
 `
 
 const GET_TODOS = gql`
-  {
-    allTodos(_size: 5) {
+  query TodosByUser($owner: String!) {
+    todosByUser(owner: $owner) {
       data {
-        text
-        done
         _id
-        _ts
+        text
         owner
       }
     }
@@ -78,34 +76,23 @@ const UPDATE_TODO_DONE = gql`
 export default props => {
   const { user } = useContext(IdentityContext)
   const [clicked, setClicked] = useState(false)
-  const { loading, error, data } = useQuery(GET_TODOS)
+  const { loading, error, data, refetch } = useQuery(GET_TODOS, {
+    variables: { owner: props.location.state.user || user.id },
+  })
 
   if (loading) return <div>Loading</div>
   if (error) return <div>{error.message}</div>
 
   const renderTodos = () =>
-    data.allTodos.data.map(item => {
+    data.todosByUser.data.map(item => {
       return <li key={item._id}>{item.text}</li>
     })
-
-  // const { loading, error, refetch, data } = useQuery(GET_TODOS, {
-  //   variables: {
-  //     user: props.location.state.user,
-  //   },
-  // })
-  // if (loading) return <div>Loading</div>
-  // if (error) return <div>{error.message}</div>
-  // console.log(props.location.state.user)
-  // console.log(data)
-
-  // const renderTodos = () => {
-  //   return data.todos.map(todo => <li>{todo.text}</li>)
-  // }
 
   const clickCheck = () => {
     if (clicked) return <TodoBox cancel={() => setClicked(!clicked)} />
 
-    if (!clicked)
+    if (!clicked) {
+      refetch()
       return (
         <>
           <PlusButton onClick={() => setClicked(!clicked)}>
@@ -117,11 +104,11 @@ export default props => {
           <ul>{renderTodos()}</ul>
         </>
       )
+    }
   }
-
   return (
     <Layout>
-      {/* <h1>Hello {user.user_metadata.full_name}</h1> */}
+      <h1>Hello {user.user_metadata.full_name}</h1>
       <Conatiner>{clickCheck()}</Conatiner>
     </Layout>
   )

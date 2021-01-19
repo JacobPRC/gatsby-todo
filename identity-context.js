@@ -15,7 +15,7 @@ const IdentityProvider = props => {
   netlifyIdentity.on("login", user => {
     netlifyIdentity.close()
     setUser(user)
-    // navigate("/app", { state: { user: netlifyIdentity.currentUser().id } })
+    navigate("/app", { state: { user: netlifyIdentity.currentUser().id } })
   })
   netlifyIdentity.on("logout", () => {
     netlifyIdentity.close()

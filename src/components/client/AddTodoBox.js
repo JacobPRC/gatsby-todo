@@ -17,14 +17,14 @@ const Box = styled.textarea`
 `
 
 const ADD_TODO = gql`
-  mutation addTodo($text: String!, $user: ID!) {
-    addTodo(text: $text, user: $user) {
-      id
+  mutation CreateTodo($text: String!, $user: String!) {
+    createTodo(data: { text: $text, owner: $user, done: false }) {
+      _id
     }
   }
 `
 
-export default ({ cancel, refetch }) => {
+export default ({ cancel }) => {
   const [todo, setTodo] = useState()
   const [todos, setTodos] = useState([])
   const [addTodo] = useMutation(ADD_TODO)
