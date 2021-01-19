@@ -10,7 +10,7 @@ export default () => {
 
   const onButtonClick = () => {
     if (user) {
-      return navigate("/app", { state: { user: user.id } })
+      return navigate("/app")
     }
     return NetlifyIdentity.open()
   }

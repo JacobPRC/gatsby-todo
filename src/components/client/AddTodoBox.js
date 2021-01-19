@@ -18,7 +18,7 @@ const Box = styled.textarea`
 
 const ADD_TODO = gql`
   mutation CreateTodo($text: String!, $user: String!) {
-    createTodo(data: { text: $text, owner: $user, done: false }) {
+    createTodo(data: { text: $text, owner: $user }) {
       _id
     }
   }
@@ -26,7 +26,6 @@ const ADD_TODO = gql`
 
 export default ({ cancel }) => {
   const [todo, setTodo] = useState()
-  const [todos, setTodos] = useState([])
   const [addTodo] = useMutation(ADD_TODO)
 
   const user = netlifyIdentity.currentUser()
@@ -34,6 +33,7 @@ export default ({ cancel }) => {
   const submission = e => {
     e.preventDefault()
     addTodo({ variables: { text: todo, user: user.id } })
+    cancel()
   }
   return (
     <>

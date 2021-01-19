@@ -1,6 +1,5 @@
 type Todo {
   text: String
-  done: Boolean
   owner: String
 }
 type Query {
