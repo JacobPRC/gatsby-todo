@@ -76,8 +76,9 @@ const UPDATE_TODO_DONE = gql`
 export default props => {
   const { user } = useContext(IdentityContext)
   const [clicked, setClicked] = useState(false)
+  const forProd = !user ? "error" : user ? user.id : props.loading.state.user
   const { loading, error, data, refetch } = useQuery(GET_TODOS, {
-    variables: { owner: user.id || props.location.state.user },
+    variables: { owner: forProd },
   })
 
   if (loading) return <div>Loading</div>
