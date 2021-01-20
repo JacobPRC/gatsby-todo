@@ -1,73 +1,12 @@
-import React, { useState, useContext } from "react"
+import React, { useContext } from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
-import styled from "styled-components"
 import NetlifyIdentity from "netlify-identity-widget"
 
 import { IdentityContext } from "../../../identity-context"
+import * as S from "./layout-styles"
 
-const Li = styled.li`
-  display: inline-block;
-  margin-right: 1rem;
-  text-shadow: none;
-`
-
-const HeaderLink = styled.li`
-  display: inline-block;
-  margin-right: 1rem;
-  text-shadow: none;
-  color: "black";
-  textshadow: none;
-  textdecoration: none;
-  backgroundimage: none;
-  color: #575757;
-  cursor: pointer;
-`
-
-const Header = styled.header`
-  padding: 1rem;
-  background-color: #fff;
-  height: 4rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-`
-
-const Nav = styled.nav`
-  display: flex;
-  position: relative;
-  align-items: center;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
-  min-height: 3rem;
-  margin: 0 auto;
-  max-width: 1088px;
-  height: 100%;
-`
-
-const NavContainer = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  justify-content: space-between;
-`
-
-const StyledH3 = styled.h3`
-  display: inline;
-  color: #e44232;
-  padding-left: 2%;
-  margin-top: 1rem;
-`
-const StyledUl = styled.ul`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  list-style: none;
-`
-
-const ListLink = ({ href, state, children }) => (
-  <Li>
+const ListLink = ({ href, children }) => (
+  <S.Li>
     <Link
       style={{
         color: "black",
@@ -81,7 +20,7 @@ const ListLink = ({ href, state, children }) => (
     >
       {children}
     </Link>
-  </Li>
+  </S.Li>
 )
 
 export default () => {
@@ -105,21 +44,23 @@ export default () => {
       return (
         <>
           <ListLink href="/app">{user.user_metadata.full_name}</ListLink>
-          <HeaderLink onClick={() => NetlifyIdentity.open()}>Logout</HeaderLink>
+          <S.HeaderLink onClick={() => NetlifyIdentity.open()}>
+            Logout
+          </S.HeaderLink>
         </>
       )
     }
     return (
-      <HeaderLink onClick={() => NetlifyIdentity.open()} href="/">
+      <S.HeaderLink onClick={() => NetlifyIdentity.open()} href="/">
         Login
-      </HeaderLink>
+      </S.HeaderLink>
     )
   }
 
   return (
-    <Header>
-      <Nav>
-        <NavContainer>
+    <S.Header>
+      <S.Nav>
+        <S.NavContainer>
           <Link
             to="/"
             style={{
@@ -128,11 +69,11 @@ export default () => {
               textDecoration: "none",
             }}
           >
-            <StyledH3>{title}</StyledH3>
+            <S.StyledH3>{title}</S.StyledH3>
           </Link>
-          <StyledUl>{loggedInCheck()}</StyledUl>
-        </NavContainer>
-      </Nav>
-    </Header>
+          <S.StyledUl>{loggedInCheck()}</S.StyledUl>
+        </S.NavContainer>
+      </S.Nav>
+    </S.Header>
   )
 }

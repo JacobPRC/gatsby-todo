@@ -15,6 +15,10 @@ const TrashIcon = styled.span`
   padding-left: 2%;
 `
 
+const Label = styled.label`
+  padding-left: 2%;
+`
+
 export default ({ id, text }) => {
   const [done, setDone] = useState(false)
   const [destroyTodo] = useMutation(deleteTodo)
@@ -27,12 +31,12 @@ export default ({ id, text }) => {
   const isDone = () => {
     if (done)
       return (
-        <label htmlFor="todo">
+        <Label htmlFor="todo">
           <del>{text}</del>
           <TrashIcon onClick={() => deleteItem()}>🗑️</TrashIcon>
-        </label>
+        </Label>
       )
-    return <label htmlFor="todo">{text}</label>
+    return <Label htmlFor="todo">{text}</Label>
   }
 
   return (

@@ -4,12 +4,6 @@ import styled from "styled-components"
 import GetStartedButton from "../templates/getStartedButton"
 import * as S from "../styles"
 
-const StyledH1 = styled.h1`
-  color: 1f1f1f;
-  size: 60px;
-  text-align: center;
-`
-
 const Container = styled.div`
   padding: 3rem;
   position: relative;
