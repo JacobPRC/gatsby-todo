@@ -72,10 +72,12 @@ export default () => {
     }
 
     if (clicked) {
+      refetch()
       return <TodoBox />
     }
 
     if (!clicked) {
+      refetch()
       return (
         <>
           <AS.PlusButton onClick={() => setClicked(!clicked)}>
