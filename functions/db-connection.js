@@ -10,7 +10,7 @@ function createClient() {
     )
   }
   const client = new faunadb.Client({
-    secret: "fnAD_3vPwUACBGSj6CmWWwMDMnhhsp_5v6z_Y0ta",
+    secret: process.env.SERVER_KEY || keys.SERVER_KEY,
   })
   return client
 }
