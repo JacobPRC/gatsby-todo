@@ -11,9 +11,6 @@ A tongue in cheek clone of Todoist, which allows users to sign up and create tod
 I built this app to better understand the development flow of a proper Gatsby based JAMstack app. Instead of doing a standard todo app, I wanted to create 
 something that would look nice and have more functionality. I took the idea and had a lot of fun with it. There are lots of hidden jokes and refereces to Todoist. 
 
-### Screenshots
-
-
 
 ## Built With
 
