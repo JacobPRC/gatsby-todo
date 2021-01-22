@@ -1,4 +1,4 @@
-# gatsby-todo
+# Todo Champion
 
 A todo app built with Gatsby that allows users to create lists of things they need to do and check them off
 
