@@ -14,9 +14,9 @@ something that would look nice and have more functionality. I took the idea and 
 
 ## Built With
 
-React
-Gatsby
-Netflify -- used as CMS as well as to host AWS lambda functions and their Identity authentication
-FaunaDB
+React <br />
+Gatsby <br />
+Netflify -- used as CMS as well as to host AWS lambda functions and their Identity authentication <br />
+FaunaDB <br />
 @Apollo/client -- used to retrieve and manipulate data from Faunadb with graphql queries
 
